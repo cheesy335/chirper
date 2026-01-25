@@ -10,8 +10,10 @@
 <body class="w-full h-screen bg-base-100 font-sans">
     <x-navigation />
 
-    <main class="w-full flex justify-center items-center">
+    <main class="w-full flex flex-col justify-center items-center my-10">
         {{ $slot }}
     </main>
+
+    <x-footer />
 </body>
 </html>

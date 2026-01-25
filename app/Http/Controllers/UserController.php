@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.register');
     }
 
     /**
@@ -28,7 +29,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'unique:users,email'],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        // dd($credentials);
+        $user = User::create($credentials);
+
+        Auth::login($user);
+        
+        return view('home');
     }
 
     /**
