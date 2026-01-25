@@ -4,10 +4,15 @@ use App\Http\Controllers\Auth\login;
 use App\Http\Controllers\Auth\logout;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\UserController;
+use App\Models\Chirp;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    $chirps = Chirp::latest()->get();
+
+    return view('home', [
+        'chirps' => $chirps,
+    ]);
 });
 
 // Auth

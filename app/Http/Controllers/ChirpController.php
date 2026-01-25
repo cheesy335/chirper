@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChirpController extends Controller
 {
@@ -28,7 +29,17 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $message = $request->validate([
+            'message' => 'required',
+        ]);
+
+        Chirp::create([
+            'user_id' => $user->id,
+            'message' => $request->message,
+        ]);
+
+        return back();
     }
 
     /**

@@ -2,9 +2,9 @@
     @csrf
     <fieldset class="fieldset w-full">
         <legend class="fieldset-legend">Post a Chirp</legend>
-        <textarea type="text" name="chirp" placeholder="A beautiful Day!" class="textarea h-24 w-full"></textarea>
+        <textarea type="text" name="message" placeholder="A beautiful Day!" class="textarea h-24 w-full"></textarea>
         <div class="label">
-            @error('chirp')
+            @error('message')
                 {{ $message }}
             @enderror
         </div>
