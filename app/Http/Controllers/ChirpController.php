@@ -39,7 +39,7 @@ class ChirpController extends Controller
             'message' => $request->message,
         ]);
 
-        return back();
+        return redirect('/');
     }
 
     /**
@@ -71,9 +71,7 @@ class ChirpController extends Controller
 
         $chirp->update($message);
 
-        return view('home', [
-            'chirps' => Chirp::latest()->get(),
-        ]);
+        return redirect('/');
     }
 
     /**
@@ -83,6 +81,6 @@ class ChirpController extends Controller
     {
         $chirp->delete();
 
-        return back();
+        return redirect('/');
     }
 }

@@ -27,8 +27,6 @@ class login extends Controller
 
         $request->session()->regenerate();
 
-        return view('home', [
-            'chirps' => Chirp::latest()->get(),
-        ]);
+        return redirect('/');
     }
 }

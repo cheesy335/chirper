@@ -42,9 +42,7 @@ class UserController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return view('home', [
-            'chirps' => Chirp::latest()->get(),
-        ]);
+        return redirect('/');
     }
 
     /**

@@ -16,6 +16,6 @@ class logout extends Controller
         Auth::logout();
         $request->session()->regenerate();
 
-        return view('auth.login');
+        return redirect('/');
     }
 }
