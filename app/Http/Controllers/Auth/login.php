@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chirp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,14 @@ class login extends Controller
 
         Auth::attempt($credentials);
 
-        return view('home');    
+        if (! Auth::check()) {
+            return back();
+        }
+
+        $request->session()->regenerate();
+
+        return view('home', [
+            'chirps' => Chirp::latest()->get(),
+        ]);
     }
 }

@@ -55,7 +55,9 @@ class ChirpController extends Controller
      */
     public function edit(Chirp $chirp)
     {
-        //
+        return view('chirps.edit', [
+            'chirp' => $chirp,
+        ]);
     }
 
     /**
@@ -63,7 +65,15 @@ class ChirpController extends Controller
      */
     public function update(Request $request, Chirp $chirp)
     {
-        //
+        $message = $request->validate([
+            'message' => 'required',
+        ]);
+
+        $chirp->update($message);
+
+        return view('home', [
+            'chirps' => Chirp::latest()->get(),
+        ]);
     }
 
     /**
@@ -71,6 +81,8 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
-        //
+        $chirp->delete();
+
+        return back();
     }
 }

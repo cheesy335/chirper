@@ -14,6 +14,8 @@ class logout extends Controller
     public function __invoke(Request $request)
     {
         Auth::logout();
+        $request->session()->regenerate();
+
         return view('auth.login');
     }
 }

@@ -13,13 +13,16 @@ Route::get('/', function () {
     return view('home', [
         'chirps' => $chirps,
     ]);
-});
+})->name('/');
 
 // Auth
-Route::get('/register', [UserController::class, 'create']);
-Route::post('/register', [UserController::class, 'store']);
-Route::view('/login', 'auth.login');
-Route::post('/login', login::class);
-Route::post('/logout', logout::class);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+Route::post('/register', [UserController::class, 'store'])->middleware('guest');
+Route::view('/login', 'auth.login')->middleware('guest');
+Route::post('/login', login::class)->middleware('guest');
+Route::post('/logout', logout::class)->middleware('auth');
 
 Route::post('/chirps', [ChirpController::class, 'store']);
+Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit']);
+Route::patch('/chirps/{chirp}', [ChirpController::class, 'update']);
+Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chirp;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,11 @@ class UserController extends Controller
         $user = User::create($credentials);
 
         Auth::login($user);
-        
-        return view('home');
+        $request->session()->regenerate();
+
+        return view('home', [
+            'chirps' => Chirp::latest()->get(),
+        ]);
     }
 
     /**
