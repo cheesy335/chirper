@@ -23,6 +23,7 @@ Route::post('/login', login::class)->middleware('guest');
 Route::post('/logout', logout::class)->middleware('auth');
 
 // Chirps
+Route::get('/chirps/create', [ChirpController::class, 'create']);
 Route::post('/chirps', [ChirpController::class, 'store']);
 Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit']);
 Route::patch('/chirps/{chirp}', [ChirpController::class, 'update']);
