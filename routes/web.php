@@ -5,16 +5,16 @@ use App\Http\Controllers\Auth\logout;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Chirp;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $chirps = Chirp::latest()->get();
+    $posts = Post::latest()->get();
 
     return view('home', [
-        'chirps' => $chirps,
+        'posts' => $posts,
     ]);
-})->name('/');
+});
 
 // Auth
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');

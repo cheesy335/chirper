@@ -5,8 +5,7 @@
 
     <div>
         @auth
-            <div class="flex items-center gap-x-2">
-                <a href="/profile">{{ Auth::user()->name }}</a>
+            <div class="flex items-center">
                 <form action="/logout" method="post">
                     @csrf
                     <input type="submit" value="Logout" class="btn btn-error btn-soft">

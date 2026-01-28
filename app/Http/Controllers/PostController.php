@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('/');
     }
 
     /**
@@ -28,7 +29,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (! Auth::check()) {
+            return redirect('/login');
+        }
+
+        $message = $request->validate([
+            'message' => 'required',
+        ]);
+
+        $user = Auth::user();
+        $user->posts()->create($message);
+
+        return redirect('/');
     }
 
     /**
@@ -44,7 +56,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -52,7 +66,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $message = $request->validate([
+            'message' => 'required',
+        ]);
+
+        $post->update($message);
+
+        return redirect('/');
     }
 
     /**
@@ -60,6 +80,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect('/');
     }
 }
