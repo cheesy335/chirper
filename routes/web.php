@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\login;
 use App\Http\Controllers\Auth\logout;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\Chirp;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::post('/chirps', [ChirpController::class, 'store']);
 Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit']);
 Route::patch('/chirps/{chirp}', [ChirpController::class, 'update']);
 Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);
+
+// Posts
+Route::resource('posts', PostController::class);

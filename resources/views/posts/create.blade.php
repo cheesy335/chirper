@@ -8,9 +8,7 @@
                     @csrf
 
                     <div class="form-control w-full">
-                        <textarea 
-                            name="message" 
-                            class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
+                        <textarea name="message" class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
                             rows="4" required>
                         </textarea>
 
