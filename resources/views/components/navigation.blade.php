@@ -6,6 +6,7 @@
     <div>
         @auth
             <div class="flex items-center">
+                <a href="/profile" class="btn btn-ghost">Profile</a>
                 <form action="/logout" method="post">
                     @csrf
                     <input type="submit" value="Logout" class="btn btn-error btn-soft">

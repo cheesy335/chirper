@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chirp;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,14 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user = Auth::user();
+
+        $posts = Post::where('user_id', $user->id)->latest()->get();
+
+        return view('profile.show', [
+            'user' => $user,
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -58,7 +65,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('profile.edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -66,7 +75,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $credentials = $request->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+        ]);
+
+        if ($user->name === $credentials['name'] && $user->email === $credentials['email']) {
+            return redirect('/profile');
+        }
+
+        $user->update([
+            'name' => $credentials['name'],
+            'email' => $credentials['email'],
+        ]);
+
+        return redirect('/profile');
     }
 
     /**
@@ -74,6 +97,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/');
     }
 }

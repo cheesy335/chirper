@@ -1,6 +1,7 @@
 <x-layout>
     <form action="/login" method="POST" class="fieldset rounded-box w-xs p-4">
         @csrf
+        <h1 class="text-2xl font-bold">Login</h1>
         <label class="fieldset">
             <span class="label">Email</span>
             <input type="email" name="email" placeholder="email@site.com" class="input input-primary validator"

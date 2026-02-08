@@ -22,5 +22,11 @@ Route::view('/login', 'auth.login')->middleware('guest');
 Route::post('/login', login::class)->middleware('guest');
 Route::post('/logout', logout::class)->middleware('auth');
 
+// Profile
+Route::get('/profile', [UserController::class, 'show']);
+Route::get('/profile/{user}/edit', [UserController::class, 'edit']);
+Route::patch('/profile/{user}', [UserController::class, 'update']);
+Route::delete('/profile/{user}', [UserController::class, 'destroy']);
+
 // Posts
 Route::resource('posts', PostController::class);
